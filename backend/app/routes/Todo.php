@@ -5,12 +5,10 @@ use Respect\Validation\Validator as v;
 $app->get('/', function() use ($app) {
 	try {
 		$statusCode = 200;
-
 		$response = [
 		];
 
 		$todos = Todo::orderBy('created_at')->get();
-
 		foreach($todos as $todo){
 			$response[] = [
 			'id' => $todo->id,
@@ -20,7 +18,6 @@ $app->get('/', function() use ($app) {
 			'updated_at' => $todo->updated_at
 			];
 		}
-
 	} catch (Exception $e) {
 		$statusCode = 400;
 		$response = 'There has been a problem with your request, please try again later.';
@@ -36,14 +33,12 @@ $app->get('/:id', function($id) use ($app) {
 		$response = [];
 
 		$todo = \Todo::where('id', '=', $id)->get();
-
 		if($todo->count() > 0) {
 			$todo = $todo->first();
 			$response = $todo;
 		} else {
 			throw new Exception('Todo does not exist.');
 		}
-
 	} catch (Exception $e) {
 		$statusCode = 404;
 		$response = $e->getMessage();
