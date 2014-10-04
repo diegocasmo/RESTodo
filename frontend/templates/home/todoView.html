@@ -1,0 +1,11 @@
+<li>
+	<p>{{title}}</p>
+	<form method="POST" action="#">
+		{{#if done}}
+			<input id={{id}} type="checkbox" checked>
+		{{else}}
+			<input id={{id}} type="checkbox">
+		{{/if}}
+	</form>
+	<button id="delete">Delete</button>
+</li>

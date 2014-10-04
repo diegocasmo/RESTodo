@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "*",
+        "illuminate/database": "*",
+        "respect/validation": "0.7.*@dev"
+    }
+}
