@@ -1,0 +1,25 @@
+.todo-wrapper {
+
+}
+
+.todo {
+
+	background: #EEEEEE;
+	margin: 10px 0px;
+	@include border-radius(4px);
+	@include box-shadow(rgb(85, 85, 85) 1px 1px 1px);
+
+	button {
+		margin: 0px;
+		padding: 7px;
+		@include border-radius(4px);
+	}
+
+	span {
+	}
+
+	form {
+		margin: 0px;
+	}
+
+}

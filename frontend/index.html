@@ -5,17 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>RESTodo</title>
+
+    <link rel="stylesheet" href="css/vendors/normalize.css">
+    <link rel="stylesheet" href="css/vendors/foundation.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
     <script data-main="js/main" src="js/libs/require/require.js"></script>
 </head>
 
 <body>
-    <div id="home">
-    	<div id="todo-creator"></div>
-    	<ul id="todo-list">
-    		
-    	</ul>
-    </div>
 
+
+    <div class="row app-wrapper">
+        <div class="small-12 columns">
+
+        <h1 class="site-title">RESTodo</h1>    
+
+        <div class="row">
+            <div id="home" class="small-8 small-centered columns main-content">
+                <div id="todo-creator"></div>
+                <ul id="todo-list"></ul>
+            </div>            
+        </div>    
+
+        </div>
+    </div>
 </body>
 
 </html>

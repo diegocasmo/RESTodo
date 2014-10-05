@@ -1,0 +1,44 @@
+body {
+	background: #E9EAED;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Titillium;
+}
+.app-wrapper {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.site-title {
+	text-align: center;
+}
+
+.main-content {
+	background: rgba(211, 45, 45, 0.9);
+	padding: 20px 10px;
+	@include border-radius(4px);
+	@include box-shadow(rgb(150, 150, 150) 2px 2px 3px);
+} 
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+li {
+	list-style: none;
+}
+
+input {
+	margin: 0px;
+}
+
+input[type="submit"] {
+	border: 0px;
+	padding: 10px 20px;
+	cursor: pointer;
+}

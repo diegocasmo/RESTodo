@@ -1,0 +1,25 @@
+.create-todo {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;	
+
+	input[type="text"] {
+		margin: 0px;
+		float: left;
+		width: 80%;
+		height: 38px;
+		@include border-corner-radius(top, left, 4px);
+		@include border-corner-radius(bottom, left, 4px);
+	}
+
+	input[type="submit"] {
+		background: #279741;
+		color: white;
+		border: 0px;
+		padding: 10px 20px;
+		cursor: pointer;
+		width: 20%;
+		@include border-corner-radius(top, right, 4px);
+		@include border-corner-radius(bottom, right, 4px);
+	}
+}

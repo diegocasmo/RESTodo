@@ -12,7 +12,8 @@ define([
         template: Handlebars.compile(todoCreatorView),
 
         events: {
-            'submit': '_createTodo'
+            'submit': '_createTodo',
+            'focus input[type="text"]': '_deleteTitleErrorMessages',
         },
 
         initialize: function(options) {
@@ -31,8 +32,8 @@ define([
             var title = $('input[name="title"]').val();
 
             var todo = new TodoModel({
-                title: title,
-                done: 0
+                title: $.trim(title),
+                done: $.trim(0)
             });
 
             var validator = todo._validate();
@@ -43,6 +44,15 @@ define([
                     $('[name="' + objArr.key + '"]').val(objArr.value);
                 });
             }
+        },
+
+        _deleteTitleErrorMessages: function(event) {
+            event.preventDefault();
+            _.each(this.model._customErrors.title, function(customError) {
+                $currentTarget = $(event.currentTarget);
+                if($currentTarget.val() === customError)
+                    $currentTarget.val('');
+            });          
         }
 
     });

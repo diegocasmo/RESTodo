@@ -1,4 +1,4 @@
-define([
+    define([
     'underscore',
     'backbone',
 ], function(_, Backbone) {
@@ -11,6 +11,16 @@ define([
             title: '',
             done: 0
         },
+        
+        _customErrors: {
+            title: {
+                empty: 'Please enter a Title.',
+                tooLong: 'Title is too long.'
+            },
+            done: {
+                empty: 'Please enter a valid value for Done.'
+            }
+        },
 
         _validate: function() {
             var title = $.trim(this.attributes.title),
@@ -18,17 +28,22 @@ define([
 
             var errors = [];
 
-            if (title === '') {
+            if (title === '' || title === this._customErrors.title.empty) {
                 errors.push({
                     key: 'title',
-                    value: 'Please enter a Title'
+                    value: this._customErrors.title.empty
                 });
+            } else if( title.length > 255 || title === this._customErrors.title.tooLong) {
+                 errors.push({
+                    key: 'title',
+                    value: this._customErrors.title.tooLong
+                });               
             }
 
-            if (done === '') {
+            if (done === '' || done === this._customErrors.done.empty) {
                 errors.push({
                     key: 'done',
-                    value: 'Please enter a valid value for Done'
+                    value: this._customErrors.done.empty
                 });
             }
 

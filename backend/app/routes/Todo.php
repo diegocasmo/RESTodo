@@ -58,7 +58,7 @@ $app->post('/', function() use ($app) {
 		$newTodo = new stdClass;
 		$newTodo->title = trim($request->title);
 		$newTodo->done = trim($request->done);
-		$todoValidator = v::attribute('title', v::notEmpty())
+		$todoValidator = v::attribute('title', v::notEmpty()->length(null, 250))
 						 ->attribute('done', v::int());
 
 		if ($todoValidator->validate($newTodo)) {
@@ -96,7 +96,7 @@ $app->put('/:id', function($id) use ($app) {
 			$newTodo = new stdClass;
 			$newTodo->title = trim($request->title);
 			$newTodo->done = trim($request->done);
-			$todoValidator = v::attribute('title', v::notEmpty())
+			$todoValidator = v::attribute('title', v::notEmpty()->length(null, 250))
 							 ->attribute('done', v::int());
 
 			if ($todoValidator->validate($newTodo)) {

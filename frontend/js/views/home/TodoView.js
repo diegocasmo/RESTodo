@@ -10,7 +10,7 @@ define([
 
         template: Handlebars.compile(todoView),
         
-        tagName: 'article',
+        tagName: 'li',
 
         className: 'todo',
 
