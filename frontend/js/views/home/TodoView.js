@@ -14,13 +14,10 @@ define([
 
         className: 'todo',
 
-        events: {
-            'click input[type="checkbox"]': '_changeTodoState',
-            'click #delete': '_deleteTodo'
-        },
-
         initialize: function(options) {
             this.model = options.model;
+            this.listenTo(this.model, "remove", this._removeModel);
+            this.listenTo(this.model, "change", this._changeModel);
             this.render();
         },
 
@@ -29,26 +26,57 @@ define([
             return this;
         },
 
-        _changeTodoState: function(event) {
-            event.preventDefault();
-            var done = this.model.get('done');
-            if(done === 1)
-                done = 0;
-            else
-                done = 1;
-            this.model.save({
-                'title': this.model.get('title'),
-                'done': done
-            }, { url: this.model.url + this.model.get('id') });
+        _removeModel: function() {
+             console.log('triggered _removeModel');
+
+            var that = this;
+            // needs to handle success and errors better...
+            that.model.destroy(
+            {
+                url: that.model.url + that.model.get('id'),
+                success: function(model, response, options) {
+                    that._setFlashMessage(response);
+                },
+                error: function() {
+                    that._setFlashMessage('There has been an error, please try again later.');
+                }
+            });            
         },
 
-        _deleteTodo: function(event) {
-            event.preventDefault();
-            this.model.destroy({ url: this.model.url + this.model.get('id') }, function(data) {
-                console.log(data);
+        _changeModel: function() {
+            console.log('triggered _changeModel');
+            
+            var that = this;
+            // needs to handle success and errors better...
+            that.model.save({
+                'title': that.model.get('title'),
+                'done': that.model.get('done')
+            }, 
+            { 
+                url: that.model.url + that.model.get('id'),
+                success: function(model, response, options) {
+                    that._setFlashMessage(response);
+                }, 
+                error: function() {
+                    that._setFlashMessage('There has been an error, please try again later.');
+                }
             });
-        }
+        },
 
+        _setFlashMessage: function(msg) {
+            $flashMessage = $('#flash-message');
+            $flashMessage.text(msg);
+            $flashMessage.animate({
+                opacity: 1
+            });
+            setTimeout(function () {
+                $flashMessage.animate({
+                    opacity: 0
+                },function() {
+                    $('#serverResponse').text('');
+                });
+            }, 1500);
+        }
     });
 
     return TodoView;

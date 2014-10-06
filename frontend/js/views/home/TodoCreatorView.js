@@ -28,8 +28,10 @@ define([
 
         _createTodo: function(event) {
             event.preventDefault();
-
-            var title = $('input[name="title"]').val();
+            console.log('triggered _createTodo');
+            
+            var that = this,        
+                title = $('input[name="title"]').val();
 
             var todo = new TodoModel({
                 title: $.trim(title),
@@ -38,7 +40,14 @@ define([
 
             var validator = todo._validate();
             if (_.isEmpty(validator)) {
-                todo.save();
+                todo.save(null, {
+                    success: function(model, response, options) {
+                        that._setFlashMessage(response);
+                    },
+                    error: function() {
+                        that._setFlashMessage('There has been an error, please try again later.');
+                    }
+                });
             } else {
                 validator.forEach(function(objArr) {
                     $('[name="' + objArr.key + '"]').val(objArr.value);
@@ -53,6 +62,21 @@ define([
                 if($currentTarget.val() === customError)
                     $currentTarget.val('');
             });          
+        },
+
+        _setFlashMessage: function(msg) {
+            $flashMessage = $('#flash-message');
+            $flashMessage.text(msg);
+            $flashMessage.animate({
+                opacity: 1
+            });
+            setTimeout(function () {
+                $flashMessage.animate({
+                    opacity: 0
+                },function() {
+                    $('#serverResponse').text('');
+                });
+            }, 1500);
         }
 
     });

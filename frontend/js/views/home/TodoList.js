@@ -11,9 +11,13 @@ define([
 
         el: $('#todo-list'),
 
+        events: {
+            'click input[type="checkbox"]': '_changeTodoState',
+            'click .delete': '_deleteTodo'
+        },
+
         initialize: function(options) {
             this.collection = options.collection;
-            this.listenTo(this.collection, 'change', this.render);
         },
 
         render: function() {
@@ -22,9 +26,34 @@ define([
                     model: todo
                 })).render().el;
             });
-
             this.$el.html(todoView);
             return this;
+        },
+
+
+        _changeTodoState: function(event) {
+            var id = parseInt(event.currentTarget.id),
+                model = this.collection.get(id),
+                done = model.get('done');
+            
+            if(done === 1)
+                done = 0;
+            else
+                done = 1;
+
+            model.set({
+                done: done
+            });
+
+            this.collection.set(model, {remove: false});
+        },
+
+        _deleteTodo: function(event) {
+            event.preventDefault();
+            var id = parseInt(event.currentTarget.id),
+                model = this.collection.get(id);
+
+            this.collection.remove(model);
         }
 
     });
