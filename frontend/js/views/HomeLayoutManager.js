@@ -45,7 +45,6 @@ define([
                 },
 
                 error: function(collection, response, options) {
-                    that.showContent();
                     that.message._setStaticMessage('There has been an error, please try again later.');
                 } 
             });

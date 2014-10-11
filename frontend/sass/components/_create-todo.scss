@@ -21,8 +21,8 @@
 	}
 
 	input[type="submit"] {
-		background: #279741;
-		color: white;
+		background: $create-subimt-bg;
+		color: $create-subimt-color;
 		border: 0px;
 		padding: 10px 20px;
 		cursor: pointer;

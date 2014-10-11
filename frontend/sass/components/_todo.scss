@@ -1,26 +1,49 @@
-.todo-wrapper {
-
+li {
+    position: relative;
+    background: $todo-bg;
+    margin: 10px auto !important;
+    max-width: 35rem !important;
+    @include border-radius(4px);
+    @include box-shadow($todo-shadow 1px 1px 1px);
 }
-
 .todo {
+    button {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        width: 30px;
+        height: 30px;
+        margin: auto 0px auto 10px;
+        padding: 0px;
+        border: none;
+        text-align: center;
+        @include border-radius(4px);
+    }
 
-	background: #EEEEEE;
-	margin: 10px auto !important;
-	max-width: 35rem !important;
-	@include border-radius(4px);
-	@include box-shadow(rgb(85, 85, 85) 1px 1px 1px);
+    label {
+        white-space: pre;
+        word-break: break-word;
+        padding: 15px 60px 15px 15px;
+        margin-left: 45px;
+        display: block;
+        cursor: default;
+    }
 
-	button {
-		margin: 0px;
-		padding: 7px;
-		@include border-radius(4px);
-	}
+    form {
+        margin: 0px;
+    }
 
-	span {
-	}
-
-	form {
-		margin: 0px;
-	}
-
+    input[type="checkbox"]{
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        margin: auto 0px auto 10px;
+        padding: 0px;
+        border: none;
+        text-align: center;
+        @include border-radius(4px);
+    }
 }
