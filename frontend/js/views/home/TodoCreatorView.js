@@ -4,8 +4,9 @@ define([
     'backbone',
     'handlebars',
     'text!templates/home/todoCreatorView.html',
-    'models/TodoModel'
-], function($, _, Backbone, Handlebars, todoCreatorView, TodoModel) {
+    'models/TodoModel',
+    'helpers/Message'
+], function($, _, Backbone, Handlebars, todoCreatorView, TodoModel, Message) {
 
     var TodoCreatorView = Backbone.View.extend({
 
@@ -17,8 +18,10 @@ define([
         },
 
         initialize: function(options) {
-            this.router = options;
+            this.router = options.router;
+            this.layoutManager = options.layoutManager;
             this.model = new TodoModel();
+            this.message = Message.getInstance();
         },
 
         render: function() {
@@ -28,7 +31,6 @@ define([
 
         _createTodo: function(event) {
             event.preventDefault();
-            console.log('triggered _createTodo');
             
             var that = this,        
                 title = $('input[name="title"]').val();
@@ -42,10 +44,11 @@ define([
             if (_.isEmpty(validator)) {
                 todo.save(null, {
                     success: function(model, response, options) {
-                        that._setFlashMessage(response);
+                        that.message._setFlashMessage(response);
+                        that.layoutManager._configureRender();
                     },
                     error: function() {
-                        that._setFlashMessage('There has been an error, please try again later.');
+                        that.message._setFlashMessage('There has been an error, please try again later.');
                     }
                 });
             } else {
@@ -62,21 +65,6 @@ define([
                 if($currentTarget.val() === customError)
                     $currentTarget.val('');
             });          
-        },
-
-        _setFlashMessage: function(msg) {
-            $flashMessage = $('#flash-message');
-            $flashMessage.text(msg);
-            $flashMessage.animate({
-                opacity: 1
-            });
-            setTimeout(function () {
-                $flashMessage.animate({
-                    opacity: 0
-                },function() {
-                    $('#serverResponse').text('');
-                });
-            }, 1500);
         }
 
     });

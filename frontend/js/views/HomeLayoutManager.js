@@ -4,9 +4,10 @@ define([
     'backbone',
     'handlebars',
     'collections/TodosCollection',
-    'views/home/TodoList',
-    'views/home/TodoCreatorView'
-], function($, _, Backbone, Handlebars, TodosCollection, TodoList, TodoCreatorView) {
+    'views/home/TodoListView',
+    'views/home/TodoCreatorView',
+    'helpers/Message'    
+], function($, _, Backbone, Handlebars, TodosCollection, TodoListView, TodoCreatorView, Message) {
 
     var HomeLayoutManager = Backbone.View.extend({
 
@@ -15,12 +16,16 @@ define([
         initialize: function(options) {
             this.router = options.router;
             this.collection = new TodosCollection();
-            this.todoCreatorView = new TodoCreatorView(this.router);
+            this.todoCreatorView = new TodoCreatorView({
+                    router: this.router,
+                    layoutManager: this
+                });
+            this.message = Message.getInstance();
             this._configureRender();
         },
 
-        render: function(todolist) {
-            todolist.setElement(this.$('#todo-list')).render();
+        render: function(todoListView) {
+            todoListView.setElement(this.$('#todo-list')).render();
             this.todoCreatorView.setElement(this.$('#todo-creator')).render();
         },
 
@@ -29,25 +34,22 @@ define([
             that.collection.fetch({
                 success: function(collection, response, options) {
                     if(typeof response === 'object') {
-                        that.todoList = new TodoList({
-                            collection: that.collection
+                        that.todoListView = new TodoListView({
+                            collection: that.collection,
+                            layoutManager: that
                         });
-                        that.render(that.todoList);
+                        that.render(that.todoListView);
                     } else {
-                        that._displayServerMessage(response);
+                        that.message._setStaticMessage(response);
                     }
                 },
 
                 error: function(collection, response, options) {
-                    that._displayServerMessage(response);
+                    that.showContent();
+                    that.message._setStaticMessage('There has been an error, please try again later.');
                 } 
             });
         },
-
-        _displayServerMessage: function(message) {
-            $('#errorMessage').text(message);
-        }
-
     });
 
     return HomeLayoutManager;

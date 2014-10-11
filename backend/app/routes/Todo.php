@@ -4,7 +4,6 @@ use Respect\Validation\Validator as v;
 
 $app->get('/', function() use ($app) {
 	try {
-		$statusCode = 200;
 		$response = [
 		];
 
@@ -19,17 +18,14 @@ $app->get('/', function() use ($app) {
 			];
 		}
 	} catch (Exception $e) {
-		$statusCode = 400;
 		$response = 'There has been a problem with your request, please try again later.';
 	} finally {
-		echo json_encode($response, $statusCode);
+		echo json_encode($response);
 	}
 });
 
 $app->get('/:id', function($id) use ($app) {
 	try {
-		$statusCode = 200;
-
 		$response = [];
 
 		$todo = \Todo::where('id', '=', $id)->get();
@@ -40,16 +36,14 @@ $app->get('/:id', function($id) use ($app) {
 			throw new Exception('Todo does not exist.');
 		}
 	} catch (Exception $e) {
-		$statusCode = 404;
 		$response = $e->getMessage();
 	} finally {
-		echo json_encode($response, $statusCode);
+		echo json_encode($response);
 	}
 });
 
 $app->post('/', function() use ($app) {
 	try {
-		$statusCode = 200;
 		$response = [];
 
 		$request = $app->request;
@@ -68,23 +62,20 @@ $app->post('/', function() use ($app) {
 			if($todo->save()) {
 				$response = 'Todo has been successfully saved.';
 			} else {
-				$statusCode = 500;
 				throw new Exception('There has been a problem with your request, please try again later.');
 			}
 		} else {
-			$statusCode = 400;
 			throw new Exception('Invalid input.');
 		}
 	} catch (Exception $e) {
 		$response = $e->getMessage();
 	} finally {
-		echo json_encode($response, $statusCode);
+		echo json_encode($response);
 	}
 });
 
 $app->put('/:id', function($id) use ($app) {
 	try {
-		$statusCode = 200;
 		$response = [];
 		$request = $app->request;
 		$request =  json_decode($request->getBody());
@@ -105,27 +96,23 @@ $app->put('/:id', function($id) use ($app) {
 				if($todo->save()) {
 					$response = 'Todo has been successfully updated.';
 				} else {
-					$statusCode = 500;
 					throw new Exception('There has been a problem with your request, please try again later.');
 				}
 			} else {
-				$statusCode = 400;
 				throw new Exception('Invalid input.');
 			}
 		} else {
-			$statusCode = 404;
 			throw new Exception('Todo does not exist.');
 		}	
 	} catch (Exception $e) {
 		$response = $e->getMessage();
 	} finally {
-		echo json_encode($response, $statusCode);
+		echo json_encode($response);
 	}
 });
 
 $app->delete('/:id', function($id) use ($app) {
 	try {
-		$statusCode = 200;
 		$response = [];
 
 		$todo = \Todo::where('id', '=', $id);
@@ -134,16 +121,14 @@ $app->delete('/:id', function($id) use ($app) {
 			if($todo->delete()) {
 				$response = 'Todo has been successfully removed.';
 			} else {
-				$statusCode = 500;
 				throw new Exception('There has been a problem with your request, please try again later.');
 			}
 		} else {
-			$statusCode = 400;
 			throw new Exception('Todo does not exist.');
 		}
 	} catch(Exception $e) {
 		$response = $e->getMessage();
 	} finally {
-		echo json_encode($response, $statusCode);
+		echo json_encode($response);
 	}
 });

@@ -5,7 +5,8 @@
 .todo {
 
 	background: #EEEEEE;
-	margin: 10px 0px;
+	margin: 10px auto !important;
+	max-width: 35rem !important;
 	@include border-radius(4px);
 	@include box-shadow(rgb(85, 85, 85) 1px 1px 1px);
 

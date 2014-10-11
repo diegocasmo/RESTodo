@@ -3,8 +3,9 @@ define([
     'underscore',
     'backbone',
     'handlebars',
-    'text!templates/home/todoView.html'
-], function($, _, Backbone, Handlebars, todoView) {
+    'text!templates/home/todoView.html',
+    'helpers/Message'
+], function($, _, Backbone, Handlebars, todoView, Message) {
 
     var TodoView = Backbone.View.extend({
 
@@ -12,12 +13,13 @@ define([
         
         tagName: 'li',
 
-        className: 'todo',
+        className: 'row todo',
 
         initialize: function(options) {
             this.model = options.model;
             this.listenTo(this.model, "remove", this._removeModel);
             this.listenTo(this.model, "change", this._changeModel);
+            this.message = Message.getInstance();
             this.render();
         },
 
@@ -27,27 +29,23 @@ define([
         },
 
         _removeModel: function() {
-             console.log('triggered _removeModel');
-
             var that = this;
-            // needs to handle success and errors better...
+            
             that.model.destroy(
             {
                 url: that.model.url + that.model.get('id'),
                 success: function(model, response, options) {
-                    that._setFlashMessage(response);
+                    that.message._setFlashMessage(response);
                 },
                 error: function() {
-                    that._setFlashMessage('There has been an error, please try again later.');
+                    that.message._setFlashMessage('There has been an error, please try again later.');
                 }
             });            
         },
 
         _changeModel: function() {
-            console.log('triggered _changeModel');
-            
             var that = this;
-            // needs to handle success and errors better...
+
             that.model.save({
                 'title': that.model.get('title'),
                 'done': that.model.get('done')
@@ -55,27 +53,16 @@ define([
             { 
                 url: that.model.url + that.model.get('id'),
                 success: function(model, response, options) {
-                    that._setFlashMessage(response);
+                    that.message._setFlashMessage(response);
                 }, 
-                error: function() {
-                    that._setFlashMessage('There has been an error, please try again later.');
+                error: function(model, response, options) {
+                    console.log(model);
+                    console.log(response);
+                    console.log(options);
+
+                    that.message._setFlashMessage('There has been an error, please try again later.');
                 }
             });
-        },
-
-        _setFlashMessage: function(msg) {
-            $flashMessage = $('#flash-message');
-            $flashMessage.text(msg);
-            $flashMessage.animate({
-                opacity: 1
-            });
-            setTimeout(function () {
-                $flashMessage.animate({
-                    opacity: 0
-                },function() {
-                    $('#serverResponse').text('');
-                });
-            }, 1500);
         }
     });
 

@@ -8,25 +8,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Titillium;
 }
 
-/* line 10, ../sass/base/_base.scss */
-span.flash-message {
-  display: block;
-  opacity: 0;
-  text-align: center;
-  font-size: 16px;
-}
-
-/* line 17, ../sass/base/_base.scss */
-span.error {
-  display: block;
-  color: white;
-  text-align: center;
-  background: none;
-  margin: 0px;
-  font-size: 14px;
-}
-
-/* line 26, ../sass/base/_base.scss */
+/* line 9, ../sass/base/_base.scss */
 .app-wrapper {
   position: relative;
   top: 50%;
@@ -35,12 +17,14 @@ span.error {
   transform: translateY(-50%);
 }
 
-/* line 34, ../sass/base/_base.scss */
+/* line 17, ../sass/base/_base.scss */
 .site-title {
   text-align: center;
+  color: white;
+  margin: 0px;
 }
 
-/* line 38, ../sass/base/_base.scss */
+/* line 23, ../sass/base/_base.scss */
 .main-content {
   background: rgba(211, 45, 45, 0.9);
   padding: 20px 10px;
@@ -52,23 +36,23 @@ span.error {
   box-shadow: #969696 2px 2px 3px;
 }
 
-/* line 45, ../sass/base/_base.scss */
+/* line 30, ../sass/base/_base.scss */
 ul {
   margin: 0px;
   padding: 0px;
 }
 
-/* line 50, ../sass/base/_base.scss */
+/* line 35, ../sass/base/_base.scss */
 li {
   list-style: none;
 }
 
-/* line 54, ../sass/base/_base.scss */
+/* line 39, ../sass/base/_base.scss */
 input {
   margin: 0px;
 }
 
-/* line 58, ../sass/base/_base.scss */
+/* line 43, ../sass/base/_base.scss */
 input[type="submit"] {
   border: 0px;
   padding: 10px 20px;
@@ -80,49 +64,100 @@ form {
   margin: 10px 0px;
 }
 
+/* line 1, ../sass/base/_messages.scss */
+span.flash-message {
+  display: block;
+  opacity: 0;
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+  background: rgba(201, 215, 199, 0.36);
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 9px;
+  color: white;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 16, ../sass/base/_messages.scss */
+span.error {
+  display: block;
+  color: white;
+  text-align: center;
+  background: none;
+  margin: 0px;
+  font-size: 14px;
+}
+
 @font-face {
   font-family: "Titillium";
-  src: url('fonts/titillium/titillium-thin.eot?1412524894') format('embedded-opentype'), url('fonts/titillium/titillium-thin.ttf?1412524894') format('truetype'), url('fonts/titillium/titillium-thin.woff?1412524894') format('woff');
+  src: url('fonts/titillium/titillium-thin.eot?1412548848') format('embedded-opentype'), url('fonts/titillium/titillium-thin.ttf?1412548848') format('truetype'), url('fonts/titillium/titillium-thin.woff?1412548848') format('woff');
 }
 /* line 1, ../sass/components/_create-todo.scss */
 .create-todo {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0px auto 10px;
   text-align: center;
 }
-/* line 6, ../sass/components/_create-todo.scss */
-.create-todo input[type="text"] {
-  margin: 0px;
-  float: left;
-  width: 80%;
-  height: 38px;
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+@media (min-width: 768px) {
+  /* line 1, ../sass/components/_create-todo.scss */
+  .create-todo {
+    margin: 0px auto 24px;
+  }
 }
-/* line 15, ../sass/components/_create-todo.scss */
+/* line 9, ../sass/components/_create-todo.scss */
+.create-todo input[type="text"] {
+  margin: 10px auto;
+  height: 38px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+@media (min-width: 768px) {
+  /* line 9, ../sass/components/_create-todo.scss */
+  .create-todo input[type="text"] {
+    margin: 0px;
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    float: left;
+    width: 80%;
+  }
+}
+/* line 23, ../sass/components/_create-todo.scss */
 .create-todo input[type="submit"] {
   background: #279741;
   color: white;
   border: 0px;
   padding: 10px 20px;
   cursor: pointer;
-  width: 20%;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+@media (min-width: 768px) {
+  /* line 23, ../sass/components/_create-todo.scss */
+  .create-todo input[type="submit"] {
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    width: 20%;
+  }
 }
 
 /* line 5, ../sass/components/_todo.scss */
 .todo {
   background: #EEEEEE;
-  margin: 10px 0px;
+  margin: 10px auto !important;
+  max-width: 35rem !important;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -130,7 +165,7 @@ form {
   -webkit-box-shadow: #555555 1px 1px 1px;
   box-shadow: #555555 1px 1px 1px;
 }
-/* line 12, ../sass/components/_todo.scss */
+/* line 13, ../sass/components/_todo.scss */
 .todo button {
   margin: 0px;
   padding: 7px;
@@ -138,7 +173,7 @@ form {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 21, ../sass/components/_todo.scss */
+/* line 22, ../sass/components/_todo.scss */
 .todo form {
   margin: 0px;
 }
