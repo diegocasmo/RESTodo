@@ -1,15 +1,13 @@
-<div class="row todo-wrapper">
-	<div class="small-1 columns">
-    	<button class="delete" id="{{id}}">X</button>
-	</div>
-	<div class="small-9 columns">
-    	<span>{{title}}</span>
-	</div>
-	<div class="small-1 columns">
-	    <form method="POST" action="#">
-	        {{#if done}}
-	        <input id={{id}} type="checkbox" checked>{{else}}
-	        <input id={{id}} type="checkbox">{{/if}}
-	    </form>
-	</div>
+<div class="small-1 columns">
+	<button class="delete" id="{{id}}">X</button>
+</div>
+<div class="small-9 columns">
+	<span>{{title}}</span>
+</div>
+<div class="small-1 columns">
+    <form method="POST" action="#">
+        {{#if done}}
+        <input id={{id}} type="checkbox" checked>{{else}}
+        <input id={{id}} type="checkbox">{{/if}}
+    </form>
 </div>

@@ -7,7 +7,7 @@ define([
     'views/home/TodoView'
 ], function($, _, Backbone, Handlebars, TodosCollection, TodoView) {
 
-    var TodoList = Backbone.View.extend({
+    var TodoListView = Backbone.View.extend({
 
         el: $('#todo-list'),
 
@@ -17,6 +17,7 @@ define([
         },
 
         initialize: function(options) {
+            this.layoutManager = options.layoutManager;
             this.collection = options.collection;
         },
 
@@ -26,10 +27,10 @@ define([
                     model: todo
                 })).render().el;
             });
+
             this.$el.html(todoView);
             return this;
         },
-
 
         _changeTodoState: function(event) {
             var id = parseInt(event.currentTarget.id),
@@ -54,10 +55,11 @@ define([
                 model = this.collection.get(id);
 
             this.collection.remove(model);
+            this.layoutManager._configureRender();
         }
 
     });
 
-    return TodoList;
+    return TodoListView;
 
 });

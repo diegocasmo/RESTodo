@@ -1,0 +1,23 @@
+span.flash-message {
+    display: block;
+    opacity: 0;
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    background: rgba(201, 215, 199, 0.36);
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 9px;
+    color: white;
+    @include border-radius(4px);
+}
+
+span.error {
+    display: block;
+    color: white;
+    text-align: center;
+    background: none;
+    margin: 0px;
+    font-size: 14px;
+}
