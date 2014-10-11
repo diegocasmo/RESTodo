@@ -10,10 +10,6 @@ define([
     var TodoView = Backbone.View.extend({
 
         template: Handlebars.compile(todoView),
-        
-        tagName: 'li',
-
-        className: 'row todo',
 
         initialize: function(options) {
             this.model = options.model;

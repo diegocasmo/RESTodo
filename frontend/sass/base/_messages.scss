@@ -4,18 +4,18 @@ span.flash-message {
     text-align: center;
     font-size: 16px;
     font-style: italic;
-    background: rgba(201, 215, 199, 0.36);
+    background: $messsage-bg;
     max-width: 550px;
     margin-left: auto;
     margin-right: auto;
     padding: 9px;
-    color: white;
+    color: $message-color;
     @include border-radius(4px);
 }
 
 span.error {
     display: block;
-    color: white;
+    color: $message-color;
     text-align: center;
     background: none;
     margin: 0px;
