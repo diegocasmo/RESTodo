@@ -11,10 +11,13 @@ define([
 
         template: Handlebars.compile(todoView),
 
+        events: {
+            'click input[type="checkbox"]': '_changeModel',
+            'click .delete': '_removeModel'
+        },
+
         initialize: function(options) {
             this.model = options.model;
-            this.listenTo(this.model, "remove", this._removeModel);
-            this.listenTo(this.model, "change", this._changeModel);
             this.message = Message.getInstance();
             this.render();
         },
@@ -32,6 +35,8 @@ define([
                 url: that.model.url + that.model.get('id'),
                 success: function(model, response, options) {
                     that.message._setFlashMessage(response);
+                    that.unbind(); // Unbind all local event bindings
+                    that.remove(); // Remove view from DOM
                 },
                 error: function() {
                     that.message._setFlashMessage('There has been an error, please try again later.');
@@ -42,20 +47,25 @@ define([
         _changeModel: function() {
             var that = this;
 
+            var done = that.model.get('done');
+
+            if(done === 1)
+                done = 0;
+            else
+                done = 1;
+
             that.model.save({
+                'id': that.model.get('id'),
                 'title': that.model.get('title'),
-                'done': that.model.get('done')
+                'done': done
             }, 
             { 
                 url: that.model.url + that.model.get('id'),
                 success: function(model, response, options) {
+                    that.undelegateEvents();
                     that.message._setFlashMessage(response);
                 }, 
                 error: function(model, response, options) {
-                    console.log(model);
-                    console.log(response);
-                    console.log(options);
-
                     that.message._setFlashMessage('There has been an error, please try again later.');
                 }
             });

@@ -45,6 +45,7 @@ define([
                 todo.save(null, {
                     success: function(model, response, options) {
                         that.message._setFlashMessage(response);
+                        that.undelegateEvents();
                         that.layoutManager._configureRender();
                     },
                     error: function() {
