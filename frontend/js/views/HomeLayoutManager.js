@@ -45,7 +45,7 @@ define([
                 },
 
                 error: function(collection, response, options) {
-                    that.message._setStaticMessage(ethat.message._customErrors.error);
+                    that.message._setStaticMessage(that.message._customErrors.error);
                 } 
             });
         },
