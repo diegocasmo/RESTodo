@@ -10,6 +10,11 @@ define([
 
             function createInstance() {
                 return {
+
+                    _customErrors: {
+                        error: 'There has been an srgsrgsrgrsgsrgrs error, please try again later.',
+                    },
+
                     _setFlashMessage: function(msg) {
                         $flashMessage = $('#flash-message');
                         $flashMessage.text(msg);

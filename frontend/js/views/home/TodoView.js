@@ -39,7 +39,7 @@ define([
                     that.remove(); // Remove view from DOM
                 },
                 error: function() {
-                    that.message._setFlashMessage('There has been an error, please try again later.');
+                    that.message._setFlashMessage(that.message.customErrors.error);
                 }
             });            
         },
@@ -62,11 +62,10 @@ define([
             { 
                 url: that.model.url + that.model.get('id'),
                 success: function(model, response, options) {
-                    that.undelegateEvents();
                     that.message._setFlashMessage(response);
                 }, 
                 error: function(model, response, options) {
-                    that.message._setFlashMessage('There has been an error, please try again later.');
+                    that.message._setFlashMessage(that.message.customErrors.error);
                 }
             });
         }
