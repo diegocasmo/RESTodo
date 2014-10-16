@@ -49,7 +49,7 @@ define([
                         that.layoutManager._configureRender();
                     },
                     error: function() {
-                        that.message._setFlashMessage('There has been an error, please try again later.');
+                        that.message._setFlashMessage(that.message.customErrors.error);
                     }
                 });
             } else {
