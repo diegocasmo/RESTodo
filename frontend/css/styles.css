@@ -181,18 +181,16 @@ li {
 }
 /* line 23, ../sass/components/_todo.scss */
 .todo label {
-  white-space: pre;
-  word-break: break-word;
   padding: 15px 60px 15px 15px;
   margin-left: 45px;
   display: block;
   cursor: default;
 }
-/* line 32, ../sass/components/_todo.scss */
+/* line 30, ../sass/components/_todo.scss */
 .todo form {
   margin: 0px;
 }
-/* line 36, ../sass/components/_todo.scss */
+/* line 34, ../sass/components/_todo.scss */
 .todo input[type="checkbox"] {
   position: absolute;
   top: 0px;
