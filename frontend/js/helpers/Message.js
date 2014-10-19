@@ -12,7 +12,7 @@ define([
                 return {
 
                     _customErrors: {
-                        error: 'There has been an srgsrgsrgrsgsrgrs error, please try again later.',
+                        error: 'There has been an error, please try again later.',
                     },
 
                     _setFlashMessage: function(msg) {
