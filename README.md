@@ -9,6 +9,8 @@ Installation and usage:
 
 + Create Database and import db.sql 
 
-+ Setup backend/config/Database.php 
++ Setup backend/app/config/Database.php 
+
++ Run composer install on backend/ to install backend dependencies
 
 + Enjoy: http://localhost/RESTodo/frontend/ 
