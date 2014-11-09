@@ -13,4 +13,4 @@ Installation and usage:
 
 + Run composer install on backend/ to install backend dependencies
 
-+ Enjoy: http://localhost/RESTodo/frontend/ 
++ Enjoy: http://localhost/RESTodo-master/frontend/ 
