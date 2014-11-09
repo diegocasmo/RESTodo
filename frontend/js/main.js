@@ -4,7 +4,7 @@ require.config({
     underscore: 'libs/underscore/underscore-min',
     backbone: 'libs/backbone/backbone-min',
     templates: '../templates',
-    handlebars: 'libs/handlebars/handlebars',
+    handlebars: 'libs/handlebars/handlebars'
   }
 
 });

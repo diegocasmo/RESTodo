@@ -49,7 +49,7 @@ define([
                         that.layoutManager._configureRender();
                     },
                     error: function() {
-                        that.message._setFlashMessage(that.message.customErrors.error);
+                        that.message._setFlashMessage(that.message._customErrors.error);
                     }
                 });
             } else {
