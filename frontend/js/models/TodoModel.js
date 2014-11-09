@@ -1,6 +1,6 @@
     define([
     'underscore',
-    'backbone',
+    'backbone'
 ], function(_, Backbone) {
 
     var TodoModel = Backbone.Model.extend({

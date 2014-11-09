@@ -39,7 +39,7 @@ define([
                     that.remove(); // Remove view from DOM
                 },
                 error: function() {
-                    that.message._setFlashMessage(that.message.customErrors.error);
+                    that.message._setFlashMessage(that.message._customErrors.error);
                 }
             });            
         },
@@ -65,7 +65,7 @@ define([
                     that.message._setFlashMessage(response);
                 }, 
                 error: function(model, response, options) {
-                    that.message._setFlashMessage(that.message.customErrors.error);
+                    that.message._setFlashMessage(that.message._customErrors.error);
                 }
             });
         }

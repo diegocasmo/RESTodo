@@ -17,11 +17,11 @@ $app->get('/', function() use ($app) {
 			'updated_at' => $todo->updated_at
 			];
 		}
+		echo json_encode($response);
 	} catch (Exception $e) {
 		$response = 'There has been a problem with your request, please try again later.';
-	} finally {
 		echo json_encode($response);
-	}
+	} 
 });
 
 $app->get('/:id', function($id) use ($app) {
@@ -35,9 +35,10 @@ $app->get('/:id', function($id) use ($app) {
 		} else {
 			throw new Exception('Todo does not exist.');
 		}
+
+		echo json_encode($response);
 	} catch (Exception $e) {
 		$response = $e->getMessage();
-	} finally {
 		echo json_encode($response);
 	}
 });
@@ -67,9 +68,10 @@ $app->post('/', function() use ($app) {
 		} else {
 			throw new Exception('Invalid input.');
 		}
+		
+		echo json_encode($response);
 	} catch (Exception $e) {
 		$response = $e->getMessage();
-	} finally {
 		echo json_encode($response);
 	}
 });
@@ -104,9 +106,9 @@ $app->put('/:id', function($id) use ($app) {
 		} else {
 			throw new Exception('Todo does not exist.');
 		}	
+		echo json_encode($response);
 	} catch (Exception $e) {
 		$response = $e->getMessage();
-	} finally {
 		echo json_encode($response);
 	}
 });
@@ -126,9 +128,9 @@ $app->delete('/:id', function($id) use ($app) {
 		} else {
 			throw new Exception('Todo does not exist.');
 		}
+		echo json_encode($response);
 	} catch(Exception $e) {
 		$response = $e->getMessage();
-	} finally {
 		echo json_encode($response);
 	}
 });
