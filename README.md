@@ -1,7 +1,7 @@
 RESTodo
 =======
 
-A todo application created with Slim framework for the PHP backend (integrated with Eloquent ORM and Respect Validation) and Backbone.js for the frontend.
+A todo application created with the Slim framework for the backend (integrated with Eloquent ORM and Respect Validation) and Backbone.js for the frontend.
 
 Installation and usage: 
 
