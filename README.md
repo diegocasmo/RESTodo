@@ -11,6 +11,6 @@ Installation and usage:
 
 + Setup backend/app/config/Database.php 
 
-+ Run composer install on backend/ to install backend dependencies
++ Run sudo composer install on backend/ to install backend dependencies
 
 + Enjoy: http://localhost/RESTodo-master/frontend/ 
