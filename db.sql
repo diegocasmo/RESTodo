@@ -1,11 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.2.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 09, 2014 at 09:11 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.16
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -16,9 +9,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `todo-api`
---
+
 
 -- --------------------------------------------------------
 
