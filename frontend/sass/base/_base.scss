@@ -20,8 +20,11 @@ h1, h2, h3, h4, h5, h6 {
 .main-content {
 	background: rgba(211, 45, 45, 0.9);
 	padding: 20px 10px;
-	@include border-radius(4px);
 	@include box-shadow($base-shadow 2px 2px 3px);
+	
+	@include breakpoint($tab, true) {
+		@include border-radius(4px);
+	}
 } 
 
 ul {

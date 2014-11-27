@@ -25,31 +25,36 @@ h1, h2, h3, h4, h5, h6 {
 .main-content {
   background: rgba(211, 45, 45, 0.9);
   padding: 20px 10px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
   -moz-box-shadow: #969696 2px 2px 3px;
   -webkit-box-shadow: #969696 2px 2px 3px;
   box-shadow: #969696 2px 2px 3px;
 }
+@media (min-width: 768px) {
+  /* line 20, ../sass/base/_base.scss */
+  .main-content {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+}
 
-/* line 27, ../sass/base/_base.scss */
+/* line 30, ../sass/base/_base.scss */
 ul {
   margin: 0px;
   padding: 0px;
 }
 
-/* line 32, ../sass/base/_base.scss */
+/* line 35, ../sass/base/_base.scss */
 li {
   list-style: none;
 }
 
-/* line 36, ../sass/base/_base.scss */
+/* line 39, ../sass/base/_base.scss */
 input {
   margin: 0px;
 }
 
-/* line 40, ../sass/base/_base.scss */
+/* line 43, ../sass/base/_base.scss */
 input[type="submit"] {
   border: 0px;
   padding: 10px 20px;
@@ -91,7 +96,7 @@ span.error {
 
 @font-face {
   font-family: "Titillium";
-  src: url('fonts/titillium/titillium-thin.eot?1412548848') format('embedded-opentype'), url('fonts/titillium/titillium-thin.ttf?1412548848') format('truetype'), url('fonts/titillium/titillium-thin.woff?1412548848') format('woff');
+  src: url('fonts/titillium/titillium-thin.eot?1417048961') format('embedded-opentype'), url('fonts/titillium/titillium-thin.ttf?1417048961') format('truetype'), url('fonts/titillium/titillium-thin.woff?1417048961') format('woff');
 }
 /* line 1, ../sass/components/_create-todo.scss */
 .create-todo {
