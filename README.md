@@ -13,4 +13,6 @@ Installation and usage:
 
 + Run sudo composer install on backend/ to install backend dependencies
 
-+ Enjoy: http://localhost/RESTodo-master/frontend/ 
++ Make sure backbone model and collection are pointing to the correct backend URL's.
+
++ Enjoy!

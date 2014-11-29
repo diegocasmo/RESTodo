@@ -2,107 +2,76 @@
 
 use Respect\Validation\Validator as v;
 
-$app->get('/', function() use ($app) {
-	try {
+/**
+ * API group
+ */
+$app->group('/api', function () use ($app) {
 
-		$response = [
-		];
+	/**
+	 * Todos (GET)
+	 */
+	$app->get('/todos/', function() use ($app) {
+		try {
 
-		$todos = Todo::orderBy('created_at')->get();
-		foreach($todos as $todo){
-			$response[] = [
-				'id' => $todo->id,
-				'title' => $todo->title,
-				'done' => $todo->done,
-				'created_at' => $todo->created_at,
-				'updated_at' => $todo->updated_at
+			$response = [
 			];
-		}
 
-	} catch (Exception $e) {
-		$app->response()->status(500);
-		$response = 'There has been a problem with your request, please try again later.';
-	} 
+			$todos = Todo::orderBy('created_at')->get();
+			foreach($todos as $todo){
+				$response[] = [
+					'id' => $todo->id,
+					'title' => $todo->title,
+					'done' => $todo->done,
+					'created_at' => $todo->created_at,
+					'updated_at' => $todo->updated_at
+				];
+			}
 
-	echo json_encode($response);
-});
-
-$app->get('/:id', function($id) use ($app) {
-	try {
-
-		$response = [];
-
-		$todo = \Todo::where('id', '=', $id)->get();
-		if($todo->count() > 0) 
-		{
-			$todo = $todo->first();
-			$response = $todo;
+		} catch (Exception $e) {
+			$app->response()->status(500);
+			$response = 'There has been a problem with your request, please try again later.';
 		} 
-		else 
-		{
-			throw new ResourceNotFoundException();
-		}
 
-	} catch (Exception $e) {
-		$app->response()->status($e->getCode());
-		$response = $e->getMessage();
-	}
+		echo json_encode($response);
+	});
 
-	echo json_encode($response);
-});
+	/**
+	 * Todos (GET)
+	 */
+	$app->get('/todos/:id', function($id) use ($app) {
+		try {
 
-$app->post('/', function() use ($app) {
-	try {
+			$response = [];
 
-		$response = [];
-
-		$request = $app->request;
-		$request =  json_decode($request->getBody());
-		$newTodo = new stdClass;
-		$newTodo->title = trim($request->title);
-		$newTodo->done = trim($request->done);
-		$todoValidator = v::attribute('title', v::notEmpty()->length(null, 250))
-						 ->attribute('done', v::int());
-
-		if ($todoValidator->validate($newTodo)) 
-		{
-			$todo = new \Todo();
-			$todo->title = $newTodo->title;
-			$todo->done = $newTodo->done;
-			if($todo->save()) 
+			$todo = \Todo::where('id', '=', $id)->get();
+			if($todo->count() > 0) 
 			{
-				$response = 'Todo has been successfully saved.';
+				$todo = $todo->first();
+				$response = $todo;
 			} 
 			else 
 			{
-				throw new ServerException();
+				throw new ResourceNotFoundException();
 			}
-		} 
-		else 
-		{
-			throw new ValidationException();
+
+		} catch (Exception $e) {
+			$app->response()->status($e->getCode());
+			$response = $e->getMessage();
 		}
-		
-	} catch (Exception $e) {
-		$app->response()->status($e->getCode());
-		$response = $e->getMessage();
-	}
 
-	echo json_encode($response);
-});
+		echo json_encode($response);
+	});
 
-$app->put('/:id', function($id) use ($app) {
-	try {
+	/**
+	 * Todos (POST)
+	 */
+	$app->post('/todos/', function() use ($app) {
+		try {
 
-		$response = [];
-		$request = $app->request;
-		$request =  json_decode($request->getBody());
+			$response = [];
 
-		$todo = \Todo::where('id', '=', $id);
-		if($todo->count()) 
-		{
-			$todo = $todo->first();
-
+			$request = $app->request;
+			$request =  json_decode($request->getBody());
 			$newTodo = new stdClass;
 			$newTodo->title = trim($request->title);
 			$newTodo->done = trim($request->done);
@@ -111,11 +80,12 @@ $app->put('/:id', function($id) use ($app) {
 
 			if ($todoValidator->validate($newTodo)) 
 			{
+				$todo = new \Todo();
 				$todo->title = $newTodo->title;
 				$todo->done = $newTodo->done;
 				if($todo->save()) 
 				{
-					$response = 'Todo has been successfully updated.';
+					$response = 'Todo has been successfully saved.';
 				} 
 				else 
 				{
@@ -126,46 +96,97 @@ $app->put('/:id', function($id) use ($app) {
 			{
 				throw new ValidationException();
 			}
+			
+		} catch (Exception $e) {
+			$app->response()->status($e->getCode());
+			$response = $e->getMessage();
 		}
-		else 
-		{
-			throw new ResourceNotFoundException();
-		}	
 
-	} catch (Exception $e) {
-		$app->response()->status($e->getCode());
-		$response = $e->getMessage();
-	}
+		echo json_encode($response);
+	});
 
-	echo json_encode($response);
-});
+	/**
+	 * Todos (PUT)
+	 */
+	$app->put('/todos/:id', function($id) use ($app) {
+		try {
 
-$app->delete('/:id', function($id) use ($app) {
-	try {
+			$response = [];
+			$request = $app->request;
+			$request =  json_decode($request->getBody());
 
-		$response = [];
-
-		$todo = \Todo::where('id', '=', $id);
-		if($todo->count()) 
-		{
-			$todo = $todo->first();
-			if($todo->delete()) 
+			$todo = \Todo::where('id', '=', $id);
+			if($todo->count()) 
 			{
-				$response = 'Todo has been successfully removed.';
+				$todo = $todo->first();
+
+				$newTodo = new stdClass;
+				$newTodo->title = trim($request->title);
+				$newTodo->done = trim($request->done);
+				$todoValidator = v::attribute('title', v::notEmpty()->length(null, 250))
+								 ->attribute('done', v::int());
+
+				if ($todoValidator->validate($newTodo)) 
+				{
+					$todo->title = $newTodo->title;
+					$todo->done = $newTodo->done;
+					if($todo->save()) 
+					{
+						$response = 'Todo has been successfully updated.';
+					} 
+					else 
+					{
+						throw new ServerException();
+					}
+				} 
+				else 
+				{
+					throw new ValidationException();
+				}
+			}
+			else 
+			{
+				throw new ResourceNotFoundException();
+			}	
+
+		} catch (Exception $e) {
+			$app->response()->status($e->getCode());
+			$response = $e->getMessage();
+		}
+
+		echo json_encode($response);
+	});
+
+	/**
+	 * Todos (DELETE)
+	 */
+	$app->delete('/todos/:id', function($id) use ($app) {
+		try {
+
+			$response = [];
+
+			$todo = \Todo::where('id', '=', $id);
+			if($todo->count()) 
+			{
+				$todo = $todo->first();
+				if($todo->delete()) 
+				{
+					$response = 'Todo has been successfully removed.';
+				} 
+				else 
+				{
+					throw new ServerException();
+				}
 			} 
 			else 
 			{
-				throw new ServerException();
+				throw new ResourceNotFoundException();
 			}
-		} 
-		else 
-		{
-			throw new ResourceNotFoundException();
+		} catch (Exception $e) {
+			$app->response()->status($e->getCode());
+			$response = $e->getMessage();
 		}
-	} catch (Exception $e) {
-		$app->response()->status($e->getCode());
-		$response = $e->getMessage();
-	}
 
-	echo json_encode($response);
+		echo json_encode($response);
+	});
 });
