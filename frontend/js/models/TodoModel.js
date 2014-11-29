@@ -5,7 +5,7 @@
 
     var TodoModel = Backbone.Model.extend({
 
-        url: 'http://localhost/RESTodo-master/backend/api/todos/',
+        url: 'http://localhost/RESTodo/backend/api/todos/',
 
         defaults: {
             title: '',

@@ -11,8 +11,8 @@ Installation and usage:
 
 + Setup backend/app/config/Database.php 
 
-+ Run sudo composer install on backend/ to install backend dependencies
++ Run composer install on backend/ to install backend dependencies
 
-+ Make sure backbone model and collection are pointing to the correct backend URL's.
++ Make sure backbone model, collection, and main are pointing to the correct backend URL's.
 
 + Enjoy!

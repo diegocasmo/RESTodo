@@ -18,7 +18,7 @@ require([
 	 * Initial app call to set up CSRF
 	 * protection
 	 */
-	$.get('http://localhost/RESTodo-master/backend/api/', function(data) {
+	$.get('http://localhost/RESTodo/backend/api/', function(data) {
 		
 			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 				// send CSRF token through headers

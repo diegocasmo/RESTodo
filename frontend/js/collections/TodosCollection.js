@@ -8,7 +8,7 @@ define([
 
   	model: TodoModel,
 
-    url: 'http://localhost/RESTodo-master/backend/api/todos/',
+    url: 'http://localhost/RESTodo/backend/api/todos/',
   
   });
 
